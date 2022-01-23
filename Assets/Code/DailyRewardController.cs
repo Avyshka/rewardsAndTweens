@@ -35,6 +35,7 @@ namespace Rewards
                     _dailyRewardView.SlotRewardsContainer,
                     false
                 );
+                slot.Show(i * 0.1f + 0.5f);
                 _slots.Add(slot);
             }
         }
@@ -75,6 +76,7 @@ namespace Rewards
             if (_isGetReward)
             {
                 _dailyRewardView.TimerNewReward.text = "The reward is received today";
+                _slots[_dailyRewardView.CurrentSlotInActive].StartIconAnimation();
             }
             else
             {
@@ -108,6 +110,8 @@ namespace Rewards
             {
                 return;
             }
+            
+            _slots[_dailyRewardView.CurrentSlotInActive].StopIconAnimation();
 
             var reward = _dailyRewardView.Rewards[_dailyRewardView.CurrentSlotInActive];
             CurrencyView.Instance.SetCurrency(reward.RewardType, reward.Value);
